@@ -14,8 +14,11 @@ public class PlaceTiles : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-
-		tileSprites = Resources.LoadAll<Sprite>("cpu");
+		tileSprites=new Sprite[3];
+		//tileSprites = Resources.LoadAll<Sprite>("cpu");
+		tileSprites[0] = Resources.Load<Sprite>("none");
+		tileSprites[1] = Resources.Load<Sprite>("cpu");
+		tileSprites[2] = Resources.Load<Sprite>("atomic");
 
 		//print(Application.persistentDataPath);
 
@@ -58,8 +61,22 @@ public class PlaceTiles : MonoBehaviour {
 
 					break;
 				case 1:
+				{
 					SpriteRenderer renderer=instance.GetComponent<SpriteRenderer>();
 					renderer.sprite=tileSprites[0];
+				}
+					break;
+				case 2:
+				{
+					SpriteRenderer renderer=instance.GetComponent<SpriteRenderer>();
+					renderer.sprite=tileSprites[1];
+				}
+					break;
+				case 3:
+				{
+					SpriteRenderer renderer=instance.GetComponent<SpriteRenderer>();
+					renderer.sprite=tileSprites[2];
+				}
 					break;
 				default:
 				break;
@@ -71,6 +88,11 @@ public class PlaceTiles : MonoBehaviour {
 				instance.transform.position=new Vector2(r,c); 
 			}
 		}
+
+
+		DontDestroyOnLoad(gamestate.Instance);
+		gamestate.Instance.startState();
+
 	}
 	
 	// Update is called once per frame
