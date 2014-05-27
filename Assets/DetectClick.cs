@@ -3,6 +3,8 @@ using System.Collections;
 
 public class DetectClick : MonoBehaviour {
 
+	public GameObject connector;
+
 	GameObject selection;
 
 	// Use this for initialization
@@ -24,16 +26,16 @@ public class DetectClick : MonoBehaviour {
 
 	void OnMouseEnter() {	
 		if (gamestate.Instance.selected != null) {
-			LineRenderer lineRenderer = gameObject.AddComponent<LineRenderer>();
-			lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
-			lineRenderer.SetColors(Color.green,Color.red);
-			lineRenderer.SetWidth(0.2F, 0.2F);
-			lineRenderer.SetVertexCount(2);
 		
-			lineRenderer.SetPosition(0, selection.transform.position);
+			GameObject instance=(GameObject)Instantiate(connector);
 
 
-			lineRenderer.SetPosition(1, transform.position);
+
+			float xPos=(selection.transform.position.x+transform.position.x)/2;
+			float yPos=(selection.transform.position.y+transform.position.y)/2;
+
+
+			instance.transform.position=new Vector2(xPos,yPos); 
 
 			//Debug.DrawLine (this.transform.position, selection.transform.position,Color.white);
 		}
